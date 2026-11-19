@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compartir App - Código QR</title>
     <link rel="stylesheet" href="./css/all.css">
-    <!-- Librería externa para generar QR -->
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
@@ -13,17 +12,20 @@
         <div class="login-card" style="text-align: center;">
             <header class="login-header">
                 <h1>Acceso Rápido</h1>
-                <p>Escanea este código QR para ingresar a la App</p>
+                <p>Escanea o descarga este código QR</p>
             </header>
 
-            <!-- Aquí se inyectará el QR -->
             <div id="qrcode" style="background: white; padding: 15px; display: inline-block; border-radius: 8px; margin-bottom: var(--spacing-lg);"></div>
 
             <div class="form-group">
                 <input type="text" id="urlInput" value="https://inici4rsesi0n.github.io/EnfermeriaApp/" readonly style="text-align: center; font-size: 0.8rem;">
             </div>
 
-            <a href="./index.html" class="btn btn-primary" style="text-decoration: none; display: block;">
+            <button id="btnDownload" class="btn btn-primary" style="margin-bottom: var(--spacing-md); background-color: #10b981; color: white;">
+                Descargar Imagen (PNG)
+            </button>
+
+            <a href="./index.html" class="btn btn-primary" style="text-decoration: none; display: block; background-color: transparent; border: 1px solid var(--border-color); color: var(--text-main);">
                 Volver al Login
             </a>
         </div>
