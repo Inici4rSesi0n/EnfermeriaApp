@@ -8,6 +8,22 @@
     color: var(--text-main);
     outline: none;
     transition: all 0.3s ease;
+    min-height: 56px;
+    font-size: 1rem;
 }
-.form-group input:focus, .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(88, 0, 255, 0.1); }
+.form-group input:focus, .form-group select:focus { 
+    border-color: var(--primary); 
+    box-shadow: 0 0 0 4px rgba(88, 0, 255, 0.1); 
+}
 .form-group input::placeholder { color: var(--text-muted); }
+
+input[type="date"] {
+    display: flex;
+    align-items: center;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.6;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}

@@ -121,6 +121,7 @@ th {
     box-shadow: var(--shadow-md);
     position: relative;
     transition: transform 0.2s;
+    padding: 0;
 }
 .notif-btn:hover { transform: scale(1.05); }
 .notif-badge {
@@ -172,7 +173,7 @@ th {
 
 @media (max-width: 768px) {
     .notif-container { top: 1rem; right: 1rem; }
-    .notif-btn { width: 40px; height: 40px; }
+    .notif-btn { width: 42px; height: 42px; }
     .notif-dropdown { width: calc(100vw - 2rem); right: -0.5rem; }
     
     .table-container { 
