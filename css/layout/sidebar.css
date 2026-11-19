@@ -27,6 +27,8 @@
     flex-direction: column;
     padding: var(--spacing-lg);
     position: fixed;
+    top: 0;
+    left: 0;
     height: 100dvh;
     overflow-y: auto;
     z-index: 30;
@@ -50,12 +52,14 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.5);
     z-index: 25;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 @media (max-width: 900px) {
     .mobile-header { display: flex; }
-    .sidebar { transform: translateX(-100%); }
-    .sidebar.open { transform: translateX(0); }
-    .sidebar-overlay.active { display: block; }
+    .sidebar { transform: translateX(-100%); box-shadow: none; }
+    .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+    .sidebar-overlay.active { display: block; opacity: 1; }
     .main-content { margin-left: 0; padding: 1.5rem 1rem; }
 }
