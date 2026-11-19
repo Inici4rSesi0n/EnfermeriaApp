@@ -1,4 +1,5 @@
 export const CONFIG = {
-    API_URL: 'https://api.tuhospital.com/v1',
-    MOCK_DELAY: 1000
+    MOCK_DELAY: 600,
+    STORAGE_KEY: 'srp_session',
+    DATA_KEY: 'srp_data'
 };

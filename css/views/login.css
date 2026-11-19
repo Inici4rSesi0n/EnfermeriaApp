@@ -1,2 +1,101 @@
-/* Estilos específicos para la vista del login */
-.login-form { display: flex; flex-direction: column; }
+.login-wrapper {
+    min-height: 100dvh;
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+}
+.login-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-form-container {
+    width: 100%;
+    max-width: 420px;
+    background: var(--white);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 1;
+}
+.login-right {
+    flex: 1;
+    max-width: 450px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+.login-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+.login-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(88, 0, 255, 0.85) 0%, rgba(144, 122, 255, 0.85) 50%, rgba(212, 137, 255, 0.85) 100%);
+    z-index: 1;
+}
+.login-overlay::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 1px, transparent 1px, transparent 20px);
+    opacity: 0.3;
+}
+.brand-panel {
+    text-align: center;
+    z-index: 2;
+    padding: var(--spacing-xl);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.brand-svg {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+.brand-svg:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 25px rgba(212, 137, 255, 0.8));
+}
+.brand-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.brand-quote {
+    font-style: italic;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--white);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 900px) {
+    .login-wrapper { flex-direction: column; padding: 1rem; align-items: center; justify-content: center; }
+    .login-right { display: none; }
+    .login-form-container { padding: 2rem; box-shadow: var(--shadow-md); }
+}

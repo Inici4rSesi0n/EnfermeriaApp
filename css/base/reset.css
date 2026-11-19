@@ -4,9 +4,17 @@
     padding: 0;
 }
 body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: var(--bg-dark);
+    font-family: var(--font-body);
+    background-color: var(--bg-base);
+    background-image: 
+        linear-gradient(rgba(88, 0, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88, 0, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
     color: var(--text-main);
-    line-height: 1.5;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
 }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button, input, select { font-family: inherit; }

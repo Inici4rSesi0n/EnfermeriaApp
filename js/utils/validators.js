@@ -1,9 +1,6 @@
 export const validators = {
-    isValidEmail: (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    },
-    isEmpty: (value) => {
-        return !value || value.trim() === '';
-    }
+    isValidDNI: (dni) => /^\d{8}$/.test(dni),
+    isValidPhone: (phone) => /^\d{9}$/.test(phone),
+    isValidEmail: (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+    isEmpty: (value) => !value || value.trim() === ''
 };

@@ -1,0 +1,9 @@
+.landing-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+.landing-nav { padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+.landing-logo { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: var(--primary); cursor: pointer; }
+.landing-hero { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+.hero-content h1 { font-size: 4rem; color: var(--primary); margin-bottom: 1rem; line-height: 1.1; }
+.hero-content p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem auto; }
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 21, 58, 0.6); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.stats-panel { background: var(--bg-glass); padding: 3rem; border-radius: var(--border-radius); border: 1px solid var(--white); max-width: 800px; width: 90%; text-align: center; box-shadow: var(--shadow-lg); }
