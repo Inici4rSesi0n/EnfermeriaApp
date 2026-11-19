@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnDownload.addEventListener('click', () => {
-        const imgQR = contenedorQR.querySelector('img');
+        const canvasQR = contenedorQR.querySelector('canvas');
         
-        if (imgQR) {
+        if (canvasQR) {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             
@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const qrSize = 300;
             const qrX = (canvas.width - qrSize) / 2;
             const qrY = 130;
-            ctx.drawImage(imgQR, qrX, qrY, qrSize, qrSize);
+            
+            ctx.drawImage(canvasQR, qrX, qrY, qrSize, qrSize);
 
             ctx.fillStyle = '#94a3b8';
             ctx.font = '14px system-ui, sans-serif';
