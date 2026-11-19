@@ -50,11 +50,11 @@ export const pacienteViews = {
         if (citas.length === 0) return `<tr><td colspan="5" style="text-align:center;">No tienes citas registradas.</td></tr>`;
         return citas.map(c => `
             <tr>
-                <td>${c.type}</td>
-                <td>${c.date}</td>
-                <td>${c.time}</td>
-                <td><span class="badge badge-${c.status === 'pendiente' ? 'pending' : c.status === 'atendida' ? 'success' : 'danger'}">${c.status}</span></td>
-                <td>${c.status === 'pendiente' ? `<button class="btn btn-danger cancelar-btn" data-id="${c.id}" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Cancelar</button>` : '-'}</td>
+                <td data-label="Tipo">${c.type}</td>
+                <td data-label="Fecha">${c.date}</td>
+                <td data-label="Hora">${c.time}</td>
+                <td data-label="Estado"><span class="badge badge-${c.status === 'pendiente' ? 'pending' : c.status === 'atendida' ? 'success' : 'danger'}">${c.status}</span></td>
+                <td data-label="Acción">${c.status === 'pendiente' ? `<button class="btn btn-danger cancelar-btn" data-id="${c.id}" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">Cancelar</button>` : '-'}</td>
             </tr>
         `).join('');
     },
@@ -63,13 +63,13 @@ export const pacienteViews = {
         return `
             <div class="dashboard-header"><h1>Autoevaluación de Síntomas</h1></div>
             <div class="card">
-                <h3>Arrastra tus síntomas</h3>
-                <p style="margin-bottom: 1rem;">Selecciona los síntomas que presentes y suéltalos en el recuadro.</p>
-                <div style="margin-bottom: 2rem;">
-                    ${sintomas.map(s => `<div class="symptom-chip" draggable="true" data-symptom="${s}">${s}</div>`).join('')}
+                <h3>Toca tus síntomas</h3>
+                <p style="margin-bottom: 1rem;">Selecciona los síntomas que presentes para evaluar tu nivel de riesgo.</p>
+                <div style="margin-bottom: 2rem;" class="available-symptoms">
+                    ${sintomas.map(s => `<div class="symptom-chip" data-symptom="${s}">${s}</div>`).join('')}
                 </div>
                 <div class="drop-zone" id="dropZone">
-                    <p style="color: var(--text-muted);">Suelta los síntomas aquí</p>
+                    <p style="color: var(--text-muted);">Los síntomas seleccionados aparecerán aquí</p>
                 </div>
                 <div id="resultadoRiesgo" class="hidden"></div>
             </div>
@@ -125,9 +125,9 @@ export const pacienteViews = {
         return `
             <div class="dashboard-header"><h1>Guías de Prevención</h1></div>
             <div class="dashboard-grid" style="grid-template-columns: 1fr;">
-                <div class="card" style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                <div class="card" style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;">
                     <img src="https://images.unsplash.com/photo-1584483766114-2cea6facdf57?q=80&w=200&auto=format&fit=crop" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                    <div>
+                    <div style="flex: 1; min-width: 200px;">
                         <h3>¿Cómo prevenir el contagio?</h3>
                         <ul style="margin-top: 0.5rem; padding-left: 1.2rem; color: var(--text-muted);">
                             <li>Lávate las manos frecuentemente con agua y jabón.</li>
@@ -137,9 +137,9 @@ export const pacienteViews = {
                         </ul>
                     </div>
                 </div>
-                <div class="card" style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                <div class="card" style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;">
                     <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=200&auto=format&fit=crop" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                    <div>
+                    <div style="flex: 1; min-width: 200px;">
                         <h3>Contacto con un caso de Sarampión</h3>
                         <p style="color: var(--text-muted); margin-top: 0.5rem;">El sarampión es altamente contagioso. Si estuviste cerca de alguien infectado:</p>
                         <ul style="margin-top: 0.5rem; padding-left: 1.2rem; color: var(--text-muted);">
@@ -149,9 +149,9 @@ export const pacienteViews = {
                         </ul>
                     </div>
                 </div>
-                <div class="card" style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                <div class="card" style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;">
                     <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?q=80&w=200&auto=format&fit=crop" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                    <div>
+                    <div style="flex: 1; min-width: 200px;">
                         <h3>Cuidados en casa</h3>
                         <p style="color: var(--text-muted); margin-top: 0.5rem;">Si tienes síntomas leves o estás en recuperación:</p>
                         <ul style="margin-top: 0.5rem; padding-left: 1.2rem; color: var(--text-muted);">

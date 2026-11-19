@@ -3,7 +3,7 @@ export const Sidebar = {
         const menu = user.role === 'paciente' ? this.pacienteMenu() : this.licenciadoMenu();
         return `
             <aside class="sidebar" id="sidebar">
-                <div class="sidebar-brand">SRP EXPRESS</div>
+                <div class="sidebar-brand" id="sidebarBrand" style="cursor: pointer;">SRP EXPRESS</div>
                 <div class="role-switcher">
                     <p>Rol Actual</p>
                     <span class="role-badge" style="margin-bottom: 0.5rem; display: block;">${user.role === 'paciente' ? 'Paciente' : 'Licenciado'}</span>

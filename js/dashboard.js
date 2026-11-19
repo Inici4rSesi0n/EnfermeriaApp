@@ -3,6 +3,7 @@ import { Sidebar } from './components/Sidebar.js';
 import { Notifications } from './components/Notifications.js';
 import { pacienteViews } from './views/pacienteViews.js';
 import { licenciadoViews } from './views/licenciadoViews.js';
+import { welcomeView } from './views/welcomeView.js';
 import { dataService } from './services/dataService.js';
 import { CONFIG } from './config.js';
 
@@ -21,8 +22,15 @@ const initDashboard = (baseUser) => {
 
         document.body.innerHTML = `
             <div class="mobile-header">
-                <div class="sidebar-brand" style="margin: 0;">SRP EXPRESS</div>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="sidebar-brand" style="margin: 0; flex: 1; text-align: center;">SRP EXPRESS</div>
+                <div style="width: 40px;"></div>
             </div>
             ${user.role === 'paciente' ? Notifications.render(user) : ''}
             <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -61,19 +69,25 @@ const initDashboard = (baseUser) => {
 
             try {
                 if (user.role === 'paciente') {
-                    if (viewName === 'agendar') {
+                    if (viewName === 'welcome') {
+                        mainContent.innerHTML = welcomeView.render(user);
+                    }
+                    else if (viewName === 'agendar') {
                         mainContent.innerHTML = pacienteViews.agendar(user);
                         initAgendarForm(user);
                     }
                     else if (viewName === 'sintomas') {
                         mainContent.innerHTML = pacienteViews.sintomas();
-                        initDragAndDrop();
+                        initSymptomEvaluator();
                     }
                     else if (viewName === 'esquema') mainContent.innerHTML = pacienteViews.esquema(user);
                     else if (viewName === 'campanas') mainContent.innerHTML = pacienteViews.campanas();
                     else if (viewName === 'guias') mainContent.innerHTML = pacienteViews.guias();
                 } else {
-                    if (viewName === 'agenda') {
+                    if (viewName === 'welcome') {
+                        mainContent.innerHTML = welcomeView.render(user);
+                    }
+                    else if (viewName === 'agenda') {
                         mainContent.innerHTML = licenciadoViews.agenda();
                         initAgendaActions(user);
                     }
@@ -95,6 +109,8 @@ const initDashboard = (baseUser) => {
             item.addEventListener('click', () => loadView(item.dataset.view));
         });
 
+        document.getElementById('sidebarBrand').addEventListener('click', () => loadView('welcome'));
+
         document.getElementById('btnLogout').addEventListener('click', () => {
             authService.logout();
             window.location.href = './login.html';
@@ -106,7 +122,7 @@ const initDashboard = (baseUser) => {
             loadDashboard();
         });
 
-        const defaultView = user.role === 'paciente' ? 'agendar' : 'agenda';
+        const defaultView = 'welcome';
         loadView(defaultView);
 
         if (user.role === 'paciente') {
@@ -196,49 +212,55 @@ const initDashboard = (baseUser) => {
             };
         }
 
-        function initDragAndDrop() {
-            const chips = document.querySelectorAll('.symptom-chip');
+        function initSymptomEvaluator() {
+            const allChips = document.querySelectorAll('.available-symptoms .symptom-chip');
             const dropZone = document.getElementById('dropZone');
             const resultDiv = document.getElementById('resultadoRiesgo');
-            let droppedSymptoms = [];
+            let selectedSymptoms = [];
 
-            chips.forEach(chip => {
-                chip.addEventListener('dragstart', (e) => {
-                    e.dataTransfer.setData('text/plain', chip.dataset.symptom);
+            const renderSelected = () => {
+                if (selectedSymptoms.length === 0) {
+                    dropZone.innerHTML = `<p style="color: var(--text-muted);">Los síntomas seleccionados aparecerán aquí</p>`;
+                    resultDiv.classList.add('hidden');
+                    return;
+                }
+                
+                dropZone.innerHTML = selectedSymptoms.map(s => `<span class="symptom-chip selected-chip" data-symptom="${s}">${s} ✕</span>`).join('');
+                
+                dropZone.querySelectorAll('.selected-chip').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        const s = chip.dataset.symptom;
+                        selectedSymptoms = selectedSymptoms.filter(x => x !== s);
+                        const originalChip = document.querySelector(`.available-symptoms .symptom-chip[data-symptom="${s}"]`);
+                        if (originalChip) originalChip.classList.remove('hidden');
+                        renderSelected();
+                    });
+                });
+                evaluateRisk();
+            };
+
+            allChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const symptom = chip.dataset.symptom;
+                    if (!selectedSymptoms.includes(symptom)) {
+                        selectedSymptoms.push(symptom);
+                        chip.classList.add('hidden');
+                        renderSelected();
+                    }
                 });
             });
 
-            dropZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropZone.classList.add('drag-over');
-            });
-
-            dropZone.addEventListener('dragleave', () => {
-                dropZone.classList.remove('drag-over');
-            });
-
-            dropZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('drag-over');
-                const symptom = e.dataTransfer.getData('text/plain');
-                
-                if (symptom && !droppedSymptoms.includes(symptom)) {
-                    droppedSymptoms.push(symptom);
-                    dropZone.innerHTML = droppedSymptoms.map(s => `<span class="symptom-chip" style="cursor: default;">${s}</span>`).join('');
-                    evaluateRisk(droppedSymptoms);
-                }
-            });
-
-            const evaluateRisk = (symptoms) => {
+            const evaluateRisk = () => {
+                if (selectedSymptoms.length === 0) return;
                 resultDiv.classList.remove('hidden');
-                if (symptoms.includes('Fiebre alta') && symptoms.includes('Salpullido')) {
+                if (selectedSymptoms.includes('Fiebre alta') && selectedSymptoms.includes('Salpullido')) {
                     resultDiv.className = 'risk-high';
                     resultDiv.innerHTML = `
                         <h3>⚠️ Riesgo Alto</h3>
                         <p>Los síntomas indican una alta probabilidad de Sarampión. Por favor, acuda inmediatamente a urgencias o agende una Prueba de Sarampión.</p>
                         <button class="btn btn-danger" style="margin-top: 1rem;" onclick="document.querySelector('[data-view=\\'agendar\\']').click()">Agendar Cita de Urgencia</button>
                     `;
-                } else if (symptoms.length >= 2) {
+                } else if (selectedSymptoms.length >= 2) {
                     resultDiv.className = 'risk-mid';
                     resultDiv.innerHTML = `
                         <h3>⚠️ Riesgo Moderado</h3>

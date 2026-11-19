@@ -74,29 +74,29 @@ th {
     padding: 2rem;
     text-align: center;
     background: rgba(88, 0, 255, 0.02);
-    min-height: 150px;
+    min-height: 120px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.5rem;
+    align-content: flex-start;
+    justify-content: center;
     transition: all 0.2s;
-}
-.drop-zone.drag-over {
-    background: rgba(88, 0, 255, 0.1);
-    border-color: var(--primary);
 }
 .symptom-chip {
     background: var(--white);
     border: 1px solid var(--border-glass);
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    cursor: grab;
+    cursor: pointer;
     display: inline-block;
     margin: 0.25rem;
     box-shadow: var(--shadow-sm);
     font-weight: 500;
     user-select: none;
+    transition: all 0.2s;
 }
-.symptom-chip:active { cursor: grabbing; }
+.symptom-chip:hover { background: var(--bg-input); border-color: var(--primary-light); }
+.symptom-chip.selected-chip { background: rgba(88, 0, 255, 0.1); border-color: var(--primary); color: var(--primary); font-weight: 600; }
 .risk-low { color: var(--success); background: #D1FAE5; padding: 1rem; border-radius: var(--border-radius-sm); margin-top: 1rem; }
 .risk-mid { color: var(--warning); background: #FEF3C7; padding: 1rem; border-radius: var(--border-radius-sm); margin-top: 1rem; }
 .risk-high { color: var(--danger); background: var(--danger-light); padding: 1rem; border-radius: var(--border-radius-sm); margin-top: 1rem; }
@@ -170,8 +170,55 @@ th {
 }
 .notif-item:last-child { border-bottom: none; }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     .notif-container { top: 1rem; right: 1rem; }
     .notif-btn { width: 40px; height: 40px; }
     .notif-dropdown { width: calc(100vw - 2rem); right: -0.5rem; }
+    
+    .table-container { 
+        border: none; 
+        box-shadow: none; 
+        background: transparent; 
+        margin-top: 0;
+        overflow-x: visible;
+    }
+    table { 
+        min-width: 100%; 
+        display: block; 
+    }
+    thead { 
+        display: none; 
+    }
+    tbody { 
+        display: block; 
+    }
+    tr { 
+        display: block; 
+        margin-bottom: 1rem; 
+        background: var(--white); 
+        border: 1px solid var(--border-glass); 
+        border-radius: var(--border-radius); 
+        padding: 0.5rem; 
+        box-shadow: var(--shadow-sm);
+    }
+    td { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        padding: 0.75rem 0.5rem; 
+        border-bottom: 1px dashed var(--border-glass); 
+        text-align: right; 
+        font-size: 0.9rem;
+        border-top: none;
+    }
+    td:last-child { 
+        border-bottom: none; 
+    }
+    td::before { 
+        content: attr(data-label); 
+        font-weight: 600; 
+        color: var(--text-muted); 
+        text-align: left; 
+        margin-right: 1rem;
+    }
 }

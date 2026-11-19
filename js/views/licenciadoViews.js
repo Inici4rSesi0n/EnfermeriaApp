@@ -44,14 +44,14 @@ export const licenciadoViews = {
         const citas = dataService.getAppointments();
         return citas.map(c => `
             <tr>
-                <td>${c.name}</td>
-                <td>${c.dni}</td>
-                <td>${c.type}</td>
-                <td>${c.date} - ${c.time}</td>
-                <td><span class="badge badge-${c.status === 'pendiente' ? 'pending' : c.status === 'atendida' ? 'success' : 'danger'}">${c.status}</span></td>
-                <td>
+                <td data-label="Paciente">${c.name}</td>
+                <td data-label="DNI">${c.dni}</td>
+                <td data-label="Tipo">${c.type}</td>
+                <td data-label="Fecha/Hora">${c.date} - ${c.time}</td>
+                <td data-label="Estado"><span class="badge badge-${c.status === 'pendiente' ? 'pending' : c.status === 'atendida' ? 'success' : 'danger'}">${c.status}</span></td>
+                <td data-label="Acciones">
                     ${c.status === 'pendiente' ? `
-                        <div style="display: flex; gap: 0.5rem;">
+                        <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
                             <button class="btn btn-outline btn-reprogramar" data-id="${c.id}" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Reprogramar</button>
                             <button class="btn btn-danger btn-cancelar" data-id="${c.id}" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Cancelar</button>
                         </div>
@@ -96,10 +96,10 @@ export const licenciadoViews = {
         if (citas.length === 0) return `<tr><td colspan="4" style="text-align:center;">No hay registros.</td></tr>`;
         return citas.map(c => `
             <tr>
-                <td>${c.name}</td>
-                <td>${c.dni}</td>
-                <td>${c.type}</td>
-                <td>${c.date}</td>
+                <td data-label="Paciente">${c.name}</td>
+                <td data-label="DNI">${c.dni}</td>
+                <td data-label="Procedimiento">${c.type}</td>
+                <td data-label="Fecha">${c.date}</td>
             </tr>
         `).join('');
     }

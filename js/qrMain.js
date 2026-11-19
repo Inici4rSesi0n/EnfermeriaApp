@@ -17,24 +17,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnDownload) {
         btnDownload.addEventListener('click', () => {
-            const imgQR = contenedorQR.querySelector('img');
-            if (imgQR) {
+            const qrCanvas = contenedorQR.querySelector('canvas');
+            const qrImg = contenedorQR.querySelector('img');
+            const qrSource = qrCanvas || qrImg;
+
+            if (qrSource) {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 
                 canvas.width = 800;
-                canvas.height = 1100;
+                canvas.height = 1300;
                 ctx.scale(2, 2);
 
                 ctx.fillStyle = '#F2F0FF';
-                ctx.fillRect(0, 0, 400, 550);
+                ctx.fillRect(0, 0, 400, 650);
 
                 ctx.strokeStyle = 'rgba(88, 0, 255, 0.05)';
                 ctx.lineWidth = 1;
                 for(let i=0; i<400; i+=20) {
-                    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 550); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 650); ctx.stroke();
                 }
-                for(let i=0; i<550; i+=20) {
+                for(let i=0; i<650; i+=20) {
                     ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(400, i); ctx.stroke();
                 }
 
@@ -82,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.shadowBlur = 20;
                 ctx.shadowOffsetY = 10;
                 ctx.beginPath();
-                ctx.roundRect(40, 240, 320, 320, 20);
+                ctx.roundRect(40, 230, 320, 350, 20);
                 ctx.fill();
                 
                 ctx.shadowColor = 'transparent';
@@ -92,18 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.strokeStyle = 'rgba(88, 0, 255, 0.1)';
                 ctx.lineWidth = 1;
                 ctx.beginPath();
-                ctx.roundRect(40, 240, 320, 320, 20);
+                ctx.roundRect(40, 230, 320, 350, 20);
                 ctx.stroke();
 
-                ctx.drawImage(imgQR, 75, 275, 250, 250);
+                ctx.drawImage(qrSource, 75, 250, 250, 250);
 
                 ctx.fillStyle = '#5800FF';
                 ctx.font = 'italic bold 18px Inter, sans-serif';
-                ctx.fillText('"Salvando vidas - SAN ROMÁN"', 200, 510);
+                ctx.fillText('"Salvando vidas - SAN ROMÁN"', 200, 545);
 
                 ctx.fillStyle = '#6B6189';
-                ctx.font = '400 11px Inter, sans-serif';
-                ctx.fillText(urlDestino, 200, 535);
+                ctx.font = '400 12px Inter, sans-serif';
+                ctx.fillText(urlDestino, 200, 615);
 
                 const enlaceDescarga = document.createElement('a');
                 enlaceDescarga.href = canvas.toDataURL('image/png');
