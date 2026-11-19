@@ -1,0 +1,3 @@
+h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: var(--spacing-sm); }
+p { font-size: 0.95rem; color: var(--text-muted); }
+label { font-size: 0.875rem; font-weight: 500; display: block; margin-bottom: var(--spacing-sm); }

@@ -1,0 +1,15 @@
+:root {
+    --bg-dark: #0b0f19;
+    --bg-card: #151b2b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary-blue: #38bdf8;
+    --primary-blue-hover: #0ea5e9;
+    --error-red: #ef4444;
+    --border-color: #1e293b;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --border-radius: 8px;
+}
