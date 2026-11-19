@@ -1,9 +1,49 @@
 .landing-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
 .landing-nav { padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
-.landing-logo { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: var(--primary); cursor: pointer; }
+.landing-logo { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: var(--primary); cursor: pointer; transition: transform 0.3s ease; }
+.landing-logo:hover { transform: scale(1.05); }
 .landing-hero { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
 .hero-content h1 { font-size: 4rem; color: var(--primary); margin-bottom: 1rem; line-height: 1.1; }
-.hero-content p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem auto; }
-.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 21, 58, 0.6); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.hero-content p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto; }
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 9, 20, 0.6); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
 .modal-overlay.active { opacity: 1; pointer-events: auto; }
-.stats-panel { background: var(--bg-glass); padding: 3rem; border-radius: var(--border-radius); border: 1px solid var(--white); max-width: 800px; width: 90%; text-align: center; box-shadow: var(--shadow-lg); }
+.stats-panel { background: var(--bg-glass); padding: 3rem; border-radius: var(--border-radius); border: 1px solid var(--white); max-width: 800px; width: 90%; text-align: center; box-shadow: 0 20px 40px rgba(88, 0, 255, 0.15); }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem; }
+.stat-item h3 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+
+@media (max-width: 768px) {
+    .landing-nav {
+        padding: 1rem;
+        flex-direction: row;
+    }
+    .landing-logo {
+        font-size: 1.4rem;
+    }
+    .landing-nav .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        width: auto;
+    }
+    .landing-hero {
+        padding: 1rem;
+    }
+    .hero-content h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .stats-panel {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .stat-item h3 {
+        font-size: 2rem;
+    }
+}
