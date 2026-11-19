@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compartir App - Código QR</title>
+    <link rel="stylesheet" href="./css/all.css">
+    <!-- Librería externa para generar QR -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <main class="login-container">
+        <div class="login-card" style="text-align: center;">
+            <header class="login-header">
+                <h1>Acceso Rápido</h1>
+                <p>Escanea este código QR para ingresar a la App</p>
+            </header>
+
+            <!-- Aquí se inyectará el QR -->
+            <div id="qrcode" style="background: white; padding: 15px; display: inline-block; border-radius: 8px; margin-bottom: var(--spacing-lg);"></div>
+
+            <div class="form-group">
+                <input type="text" id="urlInput" value="https://inici4rsesi0n.github.io/EnfermeriaApp/" readonly style="text-align: center; font-size: 0.8rem;">
+            </div>
+
+            <a href="./index.html" class="btn btn-primary" style="text-decoration: none; display: block;">
+                Volver al Login
+            </a>
+        </div>
+    </main>
+
+    <script type="module" src="./js/qrMain.js"></script>
+</body>
+</html>
