@@ -47,3 +47,32 @@
         font-size: 2rem;
     }
 }
+
+.landing-footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: transparent;
+    margin-top: auto;
+}
+.landing-footer p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.landing-footer a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.2s, transform 0.2s;
+}
+.landing-footer a:hover {
+    color: var(--primary-light);
+    transform: translateY(-1px);
+}
